@@ -234,14 +234,14 @@
    <!--                                                                     -->
    <!-- =================================================================== -->
 
-   <owl:Class rdf:about="&s3;ipf_olci_level_2">
-      <rdfs:label xml:lang="en">IPF Level 2 (OLCI)  </rdfs:label>
+   <owl:Class rdf:about="&s3;ipf_olci_level_2_land">
+      <rdfs:label xml:lang="en">IPF Level 2 (OLCI) Land  </rdfs:label>
       <rdfs:comment xml:lang="en">
          IPF Level 2 OLCI.
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s3;ipf_olci_level_1_2_but_cal"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>S3[AB_]_OL_2_(WFR___|WRR___|WFR_BW|WRR_BW|LFR___|LRR___|LFR_BW|LRR_BW).*</drb:nameMatch>
+         <drb:nameMatch>S3[AB_]_OL_2_(LFR___|LRR___|LFR_BW|LRR_BW).*</drb:nameMatch>
       </drb:signature>
 
       <img:descriptor rdf:parseType="Literal">
@@ -277,6 +277,58 @@
          </img:operator>
       </img:rendering>
    </owl:Class>
+
+
+
+   <!-- =================================================================== -->
+   <!--                                                                     -->
+   <!--           IPF Level-2 (OLCI)                                        -->
+   <!--                                                                     -->
+   <!-- =================================================================== -->
+
+   <owl:Class rdf:about="&s3;ipf_olci_level_2_marine">
+      <rdfs:label xml:lang="en">IPF Level 2 (OLCI) Marine  </rdfs:label>
+      <rdfs:comment xml:lang="en">
+         IPF Level 2 OLCI.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s3;ipf_olci_level_1_2_but_cal"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S3[AB_]_OL_2_(WFR___|WRR___).*</drb:nameMatch>
+      </drb:signature>
+
+      <img:descriptor rdf:parseType="Literal">
+           <img:collection xmlns:img="&img;">
+              <img:source>.</img:source>
+              <img:raster name="clh">
+                 <img:width>chl_oc4me.nc/root/dimensions/columns</img:width>
+                 <img:height>chl_oc4me.nc/root/dimensions/rows</img:height>
+                 <img:bandNumber>1</img:bandNumber>
+                 <img:data sampleModel="banded">chl_oc4me.nc/root/dataset/CHL_OC4ME/rows/columns</img:data>
+              </img:raster>
+           </img:collection>
+      </img:descriptor>
+      <img:rendering rdf:parseType="Literal">
+         <img:operator name="rgb" xmlns:img="&img;">
+            <img:script language="beanshell" version="1.0">
+               pb = new ParameterBlock();
+               iterator=source.getChildren().iterator();
+               while (iterator.hasNext())
+                  pb.addSource(iterator.next());
+               pb.set(new fr.gael.drb.cortex.topic.sentinel3.jai.operator.
+                  Common.PixelCorrection[]{
+                     fr.gael.drb.cortex.topic.sentinel3.jai.operator.
+                        Common.extractPixelCorrection (source, "chl_oc4me", "CHL_OC4ME"),
+                     }, 0);
+               pb.set(fr.gael.drb.cortex.topic.sentinel3.jai.operator.
+                        QuicklookOlciL2MRIF.extractFlags(source), 1);
+               img = JAI.create("QuicklookOlciL2M",pb);
+               return img;
+            </img:script>
+         </img:operator>
+      </img:rendering>
+   </owl:Class>
+
+
    
    <!-- =================================================================== -->
    <!--                                                                     -->

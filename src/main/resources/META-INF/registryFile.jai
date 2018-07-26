@@ -52,8 +52,10 @@
 #
 descriptor	fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookOlciDescriptor
 descriptor	fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookOlciL2LDescriptor
+descriptor	fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookOlciL2MDescriptor
 descriptor  fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookSlstrDescriptor
 descriptor  fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookSlstrL2LDescriptor
+descriptor  fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookSlstrL2MDescriptor
 descriptor  fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookSynDescriptor
 descriptor  fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookVgpDescriptor
 
@@ -63,8 +65,10 @@ descriptor  fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookVgpDescript
 #
 rendered  fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookOlciRIF	fr.gael.drb.cortex.topic.sentinel3.jai.operator QuicklookOlci	QuicklookOlci
 rendered  fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookOlciL2LRIF	fr.gael.drb.cortex.topic.sentinel3.jai.operator QuicklookOlciL2L	QuicklookOlciL2L
+rendered  fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookOlciL2MRIF	fr.gael.drb.cortex.topic.sentinel3.jai.operator QuicklookOlciL2M	QuicklookOlciL2M
 rendered  fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookSlstrRIF fr.gael.drb.cortex.topic.sentinel3.jai.operator QuicklookSlstr  QuicklookSlstr
 rendered  fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookSlstrL2LRIF fr.gael.drb.cortex.topic.sentinel3.jai.operator QuicklookSlstrL2L  QuicklookSlstrL2L
+rendered  fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookSlstrL2MRIF fr.gael.drb.cortex.topic.sentinel3.jai.operator QuicklookSlstrL2M  QuicklookSlstrL2M
 rendered  fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookSynRIF fr.gael.drb.cortex.topic.sentinel3.jai.operator QuicklookSyn  QuicklookSyn
 rendered  fr.gael.drb.cortex.topic.sentinel3.jai.operator.QuicklookVgpRIF fr.gael.drb.cortex.topic.sentinel3.jai.operator QuicklookVgp  QuicklookVgp
 

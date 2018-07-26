@@ -226,14 +226,14 @@
 	<!--                                                                     -->
 	<!-- =================================================================== -->
 
-	<owl:Class rdf:about="&s3;ipf_slstr_level_2">
+	<owl:Class rdf:about="&s3;ipf_slstr_level_2_land">
 		<rdfs:label xml:lang="en">IPF Level-2 (SLSTR)  </rdfs:label>
 		<rdfs:comment xml:lang="en">
          IPF Level-2 (SLSTR).
 		</rdfs:comment>
 		<rdfs:subClassOf rdf:resource="&s3;ipf_slstr_level_1_2"/>
 		<drb:signature rdf:parseType="Resource">
-			<drb:nameMatch>S3[AB_]_SL_2_.*</drb:nameMatch>
+			<drb:nameMatch>S3[AB_]_SL_2_LST.*</drb:nameMatch>
 		</drb:signature>
 
 		<img:descriptor rdf:parseType="Literal">
@@ -288,6 +288,62 @@
 			</img:operator>
 		</img:rendering>
 	</owl:Class>
+
+
+	<owl:Class rdf:about="&s3;ipf_slstr_level_2_marine">
+		<rdfs:label xml:lang="en">IPF Level-2 (SLSTR) marine</rdfs:label>
+		<rdfs:comment xml:lang="en">
+         IPF Level-2 (SLSTR).
+		</rdfs:comment>
+		<rdfs:subClassOf rdf:resource="&s3;ipf_slstr_level_1_2"/>
+		<drb:signature rdf:parseType="Resource">
+		<drb:nameMatch>S3[AB_]_SL_2_WST.*</drb:nameMatch>
+		</drb:signature>
+		<img:descriptor rdf:parseType="Literal">
+            <img:collection xmlns:img="http://www.gael.fr/drb/image#">
+              <img:source>.</img:source>
+              <img:raster name="sst">
+                 <img:width>/data/dhus-datahub/etc/dummy.nc/root/dimensions/rows</img:width>
+                 <img:height>/data/dhus-datahub/etc/dummy.nc/root/dimensions/columns</img:height>
+                 <img:bandNumber>1</img:bandNumber>
+                 <img:data sampleModel="banded">/data/dhus-datahub/etc/dummy.nc/root/dataset/dummy/columns/rows</img:data>
+              </img:raster>
+
+              </img:collection>
+      	</img:descriptor>
+		<img:rendering rdf:parseType="Literal">
+        	<img:operator name="rgb" xmlns:img="&img;">
+            <img:script language="beanshell" version="1.0">
+            	pb = new ParameterBlock();
+               	iterator=source.getChildren().iterator();
+               	while (iterator.hasNext())
+                pb.addSource(iterator.next());
+               	pb.set(fr.gael.drb.cortex.topic.sentinel3.jai.operator.
+                        QuicklookSlstrL2MRIF.extractFlags(source), 0);
+                pb.set(fr.gael.drb.cortex.topic.sentinel3.jai.operator.
+                        QuicklookSlstrL2MRIF.extractL2P(source), 1);                       
+               	img = JAI.create("QuicklookSlstrL2M",pb);
+               //	return img;
+               	// flip ascendinig images.
+               	if (fr.gael.drb.cortex.topic.sentinel3.jai.operator.Common.isAscending(source))
+               	{
+					ParameterBlock transpose_pb = new ParameterBlock();
+                    transpose_pb.addSource(img);
+                    transpose_pb.add(javax.media.jai.operator.TransposeDescriptor.FLIP_VERTICAL);
+                    img = JAI.create("transpose",transpose_pb);
+
+                    transpose_pb = new ParameterBlock();
+                    transpose_pb.addSource(img);
+                    transpose_pb.add(javax.media.jai.operator.TransposeDescriptor.FLIP_HORIZONTAL);
+                    img = JAI.create("transpose",transpose_pb);
+                 }
+                 return img;
+            </img:script>
+         </img:operator>
+      </img:rendering>
+	</owl:Class>
+
+
 
 	<!-- =================================================================== -->
 	<!--                                                                     -->
